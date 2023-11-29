@@ -12,8 +12,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //Handling login or to homepage here
-
-
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
