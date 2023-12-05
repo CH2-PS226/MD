@@ -11,13 +11,14 @@ import capstone.catora.databinding.ItemArtworkProfileBinding
 import com.bumptech.glide.Glide
 
 class ListArtWorkProfileAdapter(private val listArtWorkProfile: ArrayList<ArtWorkProfile>) : RecyclerView.Adapter<ListArtWorkProfileAdapter.ListViewHolder>() {
+
     class ListViewHolder(val binding: ItemArtworkProfileBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(artwork: ArtWorkProfile){
 //            val image : ImageView = itemView.findViewById(R.id.iv_item_artwork_profile)
 //            Glide.with(itemView)
 //                .load(artwork.image_url)
 //                .into(binding.ivItemArtworkProfile)
-            binding.ivItemArtworkProfile.setImageResource(artwork.image_url)
+            binding.itemArtwork.setImageResource(artwork.image_url)
         }
     }
 
