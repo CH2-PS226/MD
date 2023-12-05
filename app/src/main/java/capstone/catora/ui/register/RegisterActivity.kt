@@ -13,6 +13,8 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide() //this line for remove action bar
+
         binding.tvToLogin.setOnClickListener {
             finish()
             //this will route back to login by destroying current activity
