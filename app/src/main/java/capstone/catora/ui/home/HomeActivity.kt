@@ -24,5 +24,9 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
+
     }
+
+
+
 }
