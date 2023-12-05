@@ -1,11 +1,14 @@
 package capstone.catora.ui.profile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import capstone.catora.R
 import capstone.catora.data.ArtWorkProfile
 import capstone.catora.databinding.ActivityProfileBinding
+import capstone.catora.ui.home.HomeActivity
+import capstone.catora.ui.upload.UploadActivity
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
@@ -48,5 +51,7 @@ class ProfileActivity : AppCompatActivity() {
         list.add(ArtWorkProfile(R.drawable.dummy_artwork_10))
 
         binding.rvArtworkProfile.adapter = ListArtWorkProfileAdapter(list)
+
+//
     }
 }
