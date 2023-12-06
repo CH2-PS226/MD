@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -38,38 +39,39 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:layout_marginBottom="12dp">
+            android:paddingEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ti_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:textColorHint="#888888"
-                android:hint="Create Username" />
+                android:hint="Create Username"
+                android:textColorHint="#888888" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ti_password"
                 android:layout_width="match_parent"
-                android:background="@color/white"
-                android:textColorHint="#888888"
                 android:layout_height="wrap_content"
-                android:hint="Create Password" />
+                android:background="@color/white"
+                android:hint="Create Password"
+                android:textColorHint="#888888" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
@@ -82,20 +84,40 @@
                 android:id="@+id/tv_toLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:text="Login"
-                android:textColor="#00A8E8"
-                android:clickable="true"/>
+                android:textColor="#00A8E8" />
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            tools:visibility="visible"
+            android:textColor="#FF0000"
+            tools:text="error" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+
         <Button
             android:id="@+id/btn_register"
-            android:backgroundTint="#0BAAE6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
-            android:textStyle="bold"
-            android:text="Register" />
+            android:backgroundTint="#0BAAE6"
+            android:text="Register"
+            android:textStyle="bold" />
+
+
     </LinearLayout>
 
 
