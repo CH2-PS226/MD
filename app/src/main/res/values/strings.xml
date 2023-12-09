@@ -12,4 +12,5 @@
     <string name="upload">upload</string>
     <string name="profile">Profile</string>
     <string name="searchbar_hint">Search</string>
+    <string name="welcome_to_our_app">Welcome to our app </string>
 </resources>
