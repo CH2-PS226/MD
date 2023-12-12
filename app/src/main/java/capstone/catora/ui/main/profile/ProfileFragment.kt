@@ -1,24 +1,45 @@
-package capstone.catora.ui.profile
+package capstone.catora.ui.main.profile
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import capstone.catora.R
 import capstone.catora.data.ArtWorkProfile
-import capstone.catora.databinding.ActivityProfileBinding
-import capstone.catora.ui.home.HomeActivity
-import capstone.catora.ui.upload.UploadActivity
+import capstone.catora.adapter.ListArtWorkProfileAdapter
+import capstone.catora.databinding.FragmentProfileBinding
 
-class ProfileActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityProfileBinding
+class ProfileFragment : Fragment() {
+
+    private var _binding: FragmentProfileBinding? = null
+
     private val list = ArrayList<ArtWorkProfile>()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        supportActionBar?.hide() //this line for remove action bar
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val profileViewModel =
+            ViewModelProvider(this).get(ProfileViewModel::class.java)
+
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+//        val textView: TextView = binding.textNotifications
+//        notificationsViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
+
+
+//        supportActionBar?.hide() //this line for remove action bar
 
         binding.rvArtworkProfile.setHasFixedSize(true)
         binding.rvArtworkProfile.layoutManager =
@@ -52,6 +73,12 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.rvArtworkProfile.adapter = ListArtWorkProfileAdapter(list)
 
-//
+
+        return root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -1,35 +1,51 @@
-package capstone.catora.ui.upload
+package capstone.catora.ui.main.upload
 
-import android.app.ActionBar
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import capstone.catora.R
-import capstone.catora.databinding.ActivityUploadBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import capstone.catora.databinding.FragmentUploadBinding
 import kotlin.random.Random
 
+class UploadFragment : Fragment() {
 
-class UploadActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityUploadBinding
+    private var _binding: FragmentUploadBinding? = null
 
     private var currentImageUri: Uri? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityUploadBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        var actionBar = supportActionBar
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
-        if (actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true)
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val uploadViewModel =
+            ViewModelProvider(this).get(UploadViewModel::class.java)
+
+        _binding = FragmentUploadBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+//        val textView: TextView = binding.textDashboard
+//        dashboardViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
+
+
+//        var actionBar = supportActionBar
+//
+//        if (actionBar != null){
+//            actionBar.setDisplayHomeAsUpEnabled(true)
+//        }
 
         binding.llChooseImage.setOnClickListener {
             startGalerry()
@@ -41,36 +57,34 @@ class UploadActivity : AppCompatActivity() {
             //Random.nextBoolean() just for giving dummy boolean, remove this when system has response from server
             uploadAction(Random.nextBoolean())
         }
+
+        return root
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onContextItemSelected(item)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+
 
     private fun uploadAction(isHumanArt: Boolean) {
 
         if (isHumanArt){
-            AlertDialog.Builder(this@UploadActivity).apply {
+            AlertDialog.Builder(requireContext()).apply {
                 setTitle("Success!")
                 setMessage("Your art likely human art")
                 setPositiveButton("Continue"){_,_ ->
-                    finish()
+//                    finish()
                 }
                 create()
                 show()
             }
         } else{
-            AlertDialog.Builder(this@UploadActivity).apply {
+            AlertDialog.Builder(requireContext()).apply {
                 setTitle("Failed")
                 setMessage("Your art likely Ai")
                 setPositiveButton("Close"){_,_ ->
-                    finish()
+//                    finish()
                 }
                 create()
                 show()
