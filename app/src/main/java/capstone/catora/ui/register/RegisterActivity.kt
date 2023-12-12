@@ -1,21 +1,21 @@
 package capstone.catora.ui.register
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import capstone.catora.R
-import capstone.catora.data.remote.api.ApiConfig
-import capstone.catora.data.remote.api.response.PostRegisterResponse
+import capstone.catora.data.ResultState
 import capstone.catora.databinding.ActivityRegisterBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import capstone.catora.ui.ViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
+
+    private val viewModel by viewModels<RegisterViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,41 +29,39 @@ class RegisterActivity : AppCompatActivity() {
             //this will route back to login by destroying current activity
         }
 
-        binding.btnRegister.setOnClickListener {
-            binding.tvErrorMessage.visibility = View.INVISIBLE
-            postRegister(binding.tiUsername.text.toString(), binding.tiPassword.text.toString())
-
-        }
+        setupAction()
 
     }
 
-    private fun postRegister(username: String, password: String) {
-        Log.d(TAG, "${username} - ${password}")
-        showLoading(true)
-        val client = ApiConfig.getApiService().postRegister(username, password)
-        client.enqueue(object : Callback<PostRegisterResponse> {
-            override fun onResponse(
-                call: Call<PostRegisterResponse>,
-                response: Response<PostRegisterResponse>
-            ) {
-                showLoading(false)
-                val responseBody = response.body()
-                if (response.isSuccessful && responseBody != null) {
-                    showSuccessDialog()
-                } else {
-                    binding.tvErrorMessage.text = response.message().toString()
-                    binding.tvErrorMessage.visibility = View.VISIBLE
-                    Log.e(TAG, "onFailure: ${response.message()}")
+    private fun setupAction() {
+        binding.btnRegister.setOnClickListener {
+
+            val name = binding.tiUsername.text.toString()
+            val password = binding.tiPassword.text.toString()
+
+            viewModel.userRegister(name, password).observe(this) { result ->
+                if (result != null) {
+                    when(result) {
+                        is ResultState.Loading -> {
+                            showLoading(true)
+                        }
+                        is ResultState.Success -> {
+                            val message = result.data.message
+                            showSuccessDialog(message)
+                            showLoading(false)
+                        }
+                        is ResultState.Error -> {
+                            val error = result.error
+                            showToast(error)
+                            showLoading(false)
+                        }
+                    }
                 }
             }
-            override fun onFailure(call: Call<PostRegisterResponse>, t: Throwable) {
-                showLoading(false)
-                Log.e(TAG, "onFailure: ${t.message}")
-            }
-        })
+        }
     }
 
-    private fun showSuccessDialog() {
+    private fun showSuccessDialog(message: String) {
         AlertDialog.Builder(this).apply {
             setTitle("Yeah!")
             setMessage(
@@ -83,6 +81,10 @@ class RegisterActivity : AppCompatActivity() {
         } else {
             binding.progressBar.visibility = View.GONE
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     companion object{
