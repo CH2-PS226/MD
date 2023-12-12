@@ -1,14 +1,10 @@
-package capstone.catora.ui.profile
+package capstone.catora.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import capstone.catora.R
 import capstone.catora.data.ArtWorkProfile
 import capstone.catora.databinding.ItemArtworkProfileBinding
-import com.bumptech.glide.Glide
 
 class ListArtWorkProfileAdapter(private val listArtWorkProfile: ArrayList<ArtWorkProfile>) : RecyclerView.Adapter<ListArtWorkProfileAdapter.ListViewHolder>() {
 

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileActivity">
+    tools:context=".ui.main.profile.ProfileFragment">
+
 
     <ImageView
         android:id="@+id/iv_profile_image"
@@ -51,7 +52,6 @@
         android:id="@+id/rv_artwork_profile"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingBottom="20dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

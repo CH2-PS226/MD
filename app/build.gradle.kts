@@ -64,11 +64,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
 
-    //room
-    implementation("androidx.room:room-ktx:2.6.1")
-    implementation("androidx.room:room-runtime:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
+<<<<<<< HEAD
+    
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
-
+=======
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+>>>>>>> 05f8b4aa07178ccb8d51ddc1c3dc535c0597a3cf
 }

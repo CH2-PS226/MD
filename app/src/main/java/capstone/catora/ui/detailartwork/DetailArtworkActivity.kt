@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import capstone.catora.R
 import capstone.catora.data.ArtWorkProfile
 import capstone.catora.databinding.ActivityDetailArtworkBinding
-import capstone.catora.ui.profile.ListArtWorkProfileAdapter
+import capstone.catora.adapter.ListArtWorkProfileAdapter
 
 class DetailArtworkActivity : AppCompatActivity() {
 

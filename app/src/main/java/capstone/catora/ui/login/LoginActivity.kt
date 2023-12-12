@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import capstone.catora.databinding.ActivityLoginBinding
-import capstone.catora.ui.home.HomeActivity
+import capstone.catora.ui.main.MainActivity
 import capstone.catora.ui.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
         //this button only for checking te registration, i would suggest to delete it and change to text "don't have an account? register"
         binding.btnLogin.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
     }
