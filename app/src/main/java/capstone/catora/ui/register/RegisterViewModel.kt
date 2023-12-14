@@ -30,7 +30,11 @@ class RegisterViewModel(private val repository: CatoraRepository) : ViewModel() 
         showLoading(true)
         viewModelScope.launch {
             try {
-                val response = ApiConfig.getApiService().postRegister(name, password)
+                val requestBody = mapOf(
+                    "username" to name,
+                    "password" to password
+                )
+                val response = ApiConfig.getApiService().postRegister(requestBody)
 
                 if (response.message == "Registration successful"){
                     showLoading(false)

@@ -26,29 +26,6 @@ class CatoraRepository private constructor(
         userPreference.logout()
     }
 
-    fun userLogin(email: String, password: String) = liveData  {
-        emit(ResultState.Loading)
-        try {
-            val successResponse = apiService.postLogin(email, password)
-            emit(ResultState.Success(successResponse))
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, PostLoginResponse::class.java)
-            emit(errorResponse.message?.let { ResultState.Error(it) })
-        }
-    }
-
-    fun userRegister(name: String, password: String) = liveData {
-        try {
-            val successResponse = apiService.postRegister(name, password)
-            emit(ResultState.Success(successResponse))
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, PostRegisterResponse::class.java)
-            emit(errorResponse.message?.let { ResultState.Error(it) })
-        }
-    }
-
     companion object {
         @Volatile
         private var instance: CatoraRepository? = null
