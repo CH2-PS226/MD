@@ -49,9 +49,9 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        val password = binding.tiPassword.text.toString()
-        val name = binding.tiUsername.text.toString()
         binding.btnRegister.setOnClickListener {
+            val password = binding.tiPassword.text.toString()
+            val name = binding.tiUsername.text.toString()
 
             viewModel.userRegister(name, password)
 
@@ -74,6 +74,8 @@ class RegisterActivity : AppCompatActivity() {
 //                    }
 //                }
 //            }
+
+
         }
     }
 

@@ -3,6 +3,7 @@ package capstone.catora.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import capstone.catora.databinding.ActivityLoginBinding
 import capstone.catora.ui.main.MainActivity
 import capstone.catora.ui.register.RegisterActivity
@@ -27,5 +28,15 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
+    }
+
+
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 }
