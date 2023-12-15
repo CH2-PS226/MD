@@ -49,8 +49,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            val password = binding.edUsername.text.toString()
-            val name = binding.edPassword.text.toString()
+            val password = binding.edPassword.text.toString()
+            val name = binding.edUsername.text.toString()
 
             viewModel.userLogin(name, password)
 

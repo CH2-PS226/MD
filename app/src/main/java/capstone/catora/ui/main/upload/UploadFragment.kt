@@ -1,22 +1,39 @@
 package capstone.catora.ui.main.upload
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import capstone.catora.R
+import capstone.catora.data.remote.api.ApiConfig
+import capstone.catora.data.remote.api.response.PostUploadArtWorkResponse
 import capstone.catora.databinding.FragmentUploadBinding
+import capstone.catora.utils.uriToFile
+import com.google.gson.Gson
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.HttpException
 import kotlin.random.Random
 
 class UploadFragment : Fragment() {
 
     private var _binding: FragmentUploadBinding? = null
+    private var errorMessage: String? = null
 
     private var currentImageUri: Uri? = null
 
@@ -55,7 +72,8 @@ class UploadFragment : Fragment() {
         }
         binding.btnUpload.setOnClickListener {
             //Random.nextBoolean() just for giving dummy boolean, remove this when system has response from server
-            uploadAction(Random.nextBoolean())
+//            uploadAction(Random.nextBoolean())
+            uploadImage()
         }
 
         return root
@@ -74,7 +92,8 @@ class UploadFragment : Fragment() {
                 setTitle("Success!")
                 setMessage("Your art likely human art")
                 setPositiveButton("Continue"){_,_ ->
-//                    finish()
+                    findNavController().popBackStack()
+                    findNavController().navigate(R.id.navigation_notifications)
                 }
                 create()
                 show()
@@ -116,5 +135,80 @@ class UploadFragment : Fragment() {
             binding.llChooseImage.visibility = View.GONE
             binding.tvChooseOtherImage.visibility = View.VISIBLE
         }
+    }
+
+    private fun uploadImage() {
+        showLoading(true)
+        if (currentImageUri != null) {
+
+            currentImageUri?.let { uri ->
+//                val imageFile = uriToFile(uri, requireContext()).reduceFileImage()
+                val imageFile = uriToFile(uri, requireContext())
+                Log.d("Image File", "showImage: ${imageFile.path}")
+//                val description = binding.descriptionEditText.text.toString()
+//                if (description.isEmpty()) {
+//                    showToast("Description ")
+//                    showLoading(false)
+//                    return
+//                }
+
+                val userId = "12"
+                val description = binding.edDescription.text.toString()
+                val tag = binding.edTag.text.toString()
+                val title = binding.edTitle.text.toString()
+
+                val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+                val descriptionBody = description.toRequestBody("text/plain".toMediaType())
+                val tagBody = tag.toRequestBody("text/plain".toMediaType())
+                val titleBody = title.toRequestBody("text/plain".toMediaType())
+                val userIdBody = userId.toRequestBody("text/plain".toMediaType())
+
+                val multipartBody = MultipartBody.Part.createFormData(
+                    "image",
+                    imageFile.name,
+                    requestImageFile
+                )
+
+                lifecycleScope.launch {
+                    try {
+                        val successResponse:PostUploadArtWorkResponse
+                        val apiService = ApiConfig.getApiService()
+
+
+                        successResponse = apiService.uploadImage(image = multipartBody, user_id = userIdBody, title = titleBody, tags = tagBody, description = descriptionBody)
+                        showToast(successResponse.message)
+//                        val intent = Intent(this@AddStoryActivity, MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//                        startActivity(intent)
+                        uploadAction(Random.nextBoolean())
+                        showLoading(false)
+                    } catch (e: HttpException) {
+                        val jsonInString = e.response()?.errorBody()?.string()
+                        errorMessage = jsonInString
+                        showToast(errorMessage.toString())
+                        Log.d(TAG, errorMessage.toString())
+                        showLoading(false)
+                    } finally {
+                        showLoading(false)
+                    }
+                }
+
+            } ?: showToast(getString(R.string.empty_image_warning))
+        } else {
+            showLoading(false)
+            showToast(getString(R.string.empty_image_warning))
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    companion object{
+        const val TAG = "Upload Fragment"
     }
 }

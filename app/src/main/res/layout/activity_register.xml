@@ -46,7 +46,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ti_username"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:lines="1"
+                android:singleLine="true"
+                android:layout_height="?android:attr/actionBarSize"
                 android:background="@color/white"
                 android:hint="Create Username"
                 android:textColorHint="#888888" />
@@ -63,7 +66,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ti_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:lines="1"
+                android:singleLine="true"
+                android:layout_height="?android:attr/actionBarSize"
                 android:background="@color/white"
                 android:hint="Create Password"
                 android:textColorHint="#888888" />
