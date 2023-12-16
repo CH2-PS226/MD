@@ -69,7 +69,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_username"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:lines="1"
+                android:singleLine="true"
+                android:layout_height="?android:attr/actionBarSize"
                 android:background="@color/white"
                 android:hint="@string/input_username"
                 android:textColorHint="#888888" />
@@ -89,8 +92,11 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_password"
+                android:maxLines="1"
+                android:lines="1"
+                android:singleLine="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?android:attr/actionBarSize"
                 android:background="@color/white"
                 android:hint="@string/input_password"
                 android:textColorHint="#888888" />

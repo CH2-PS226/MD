@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.upload.UploadFragment">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,20 +29,20 @@
 
             <ImageView
                 android:id="@+id/iv_artWork"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/login_bg"
                 android:visibility="gone" />
 
 
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:id="@+id/ll_choose_image"
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/upload_box"
                 android:clickable="true"
@@ -55,30 +65,31 @@
             </LinearLayout>
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/tv_choose_other_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
                 android:layout_gravity="center"
-                android:text="Choose difference image" />
+                android:clickable="true"
+                android:text="Choose difference image"
+                android:visibility="gone" />
 
             <TextView
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
                 android:text="Name" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="#888888" />
@@ -86,21 +97,22 @@
 
 
             <TextView
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
                 android:text="Tag" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_tag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="#888888" />
@@ -108,21 +120,22 @@
 
 
             <TextView
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
                 android:text="Description" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"

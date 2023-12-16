@@ -1,4 +1,5 @@
 <resources>
+    <string name="empty_image_warning">Fill in the image first</string>
     <string name="app_name">Catora</string>
     <string name="welcome_to">Welcome To</string>
     <string name="input_username">Input Username</string>
