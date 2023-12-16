@@ -54,28 +54,6 @@ class RegisterActivity : AppCompatActivity() {
             val name = binding.tiUsername.text.toString()
 
             viewModel.userRegister(name, password)
-
-//            viewModel.userRegister(name, password).observe(this) { result ->
-//                if (result != null) {
-//                    when(result) {
-//                        is ResultState.Loading -> {
-//                            showLoading(true)
-//                        }
-//                        is ResultState.Success -> {
-//                            val message = result.data.message
-//                            showSuccessDialog(message)
-//                            showLoading(false)
-//                        }
-//                        is ResultState.Error -> {
-//                            val error = result.error
-//                            showToast(error)
-//                            showLoading(false)
-//                        }
-//                    }
-//                }
-//            }
-
-
         }
     }
 
@@ -104,9 +82,6 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-//    private fun showToast(message: String) {
-//        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-//    }
 
     companion object{
         val TAG = "Register Activity"
