@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
         setupAction()
 
-        viewModel.errorLiveData.observe(this){errorMessage ->
+        viewModel.errorLiveData.observe(this){ errorMessage ->
             binding.tvErrorMessage.text = errorMessage
             binding.tvErrorMessage.visibility = View.VISIBLE
             showLoading(false)
@@ -48,8 +48,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            val password = binding.edUsername.text.toString()
-            val name = binding.edPassword.text.toString()
+            val name = binding.edUsername.text.toString()
+            val password = binding.edPassword.text.toString()
 
             viewModel.userLogin(name, password)
 

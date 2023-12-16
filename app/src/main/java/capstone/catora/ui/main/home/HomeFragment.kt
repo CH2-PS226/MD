@@ -7,17 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import capstone.catora.R
+import capstone.catora.adapter.AllArtAdapter
 import capstone.catora.data.ArtWorkProfile
 import capstone.catora.databinding.FragmentHomeBinding
 import capstone.catora.adapter.ListArtWorkProfileAdapter
+import capstone.catora.data.remote.api.response.AllArtworkResponseItem
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
-    private val list = ArrayList<ArtWorkProfile>()
+//    private val list = ArrayList<ArtWorkProfile>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -38,51 +41,44 @@ class HomeFragment : Fragment() {
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
-        binding.rvArtwork.setHasFixedSize(true)
+
+
         binding.rvArtwork.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_9))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_11))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_2))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_10))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_3))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_9))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_9))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_10))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_11))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_4))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_11))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_4))
-        list.add(ArtWorkProfile(R.drawable.dummy_artwork_10))
+        homeViewModel.listArtwork.observe(viewLifecycleOwner) {
+            setAllArtwork(it)
+        }
 
-        binding.rvArtwork.adapter = ListArtWorkProfileAdapter(list)
 
-//        binding.bottomNavigation.setOnItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.home -> {
-//                    true
-//                }
-//                R.id.upload -> {
-//                    startActivity(Intent(this, UploadActivity::class.java))
-//                    true
-//                }
-//
-//                R.id.profile -> {
-//                    startActivity(Intent(this, ProfileActivity::class.java))
-//                    true
-//                }
-//
-//                else -> false
-//            }
-//        }
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_9))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_11))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_1))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_2))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_10))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_3))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_9))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_9))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_10))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_11))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_4))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_11))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_4))
+//        list.add(ArtWorkProfile(R.drawable.dummy_artwork_10))
+
+//        binding.rvArtwork.adapter = ListArtWorkProfileAdapter(list)
 
         return root
+    }
+
+    private fun setAllArtwork(artwork: List<AllArtworkResponseItem>?) {
+        val adapter = AllArtAdapter()
+        adapter.submitList(artwork)
+        binding.rvArtwork.adapter = adapter
     }
 
     override fun onDestroyView() {
