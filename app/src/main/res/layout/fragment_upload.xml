@@ -30,6 +30,8 @@
             <ImageView
                 android:id="@+id/iv_artWork"
                 android:layout_width="match_parent"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/login_bg"

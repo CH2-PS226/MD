@@ -52,9 +52,9 @@ class LoginActivity : AppCompatActivity() {
             val name = binding.edUsername.text.toString()
             val password = binding.edPassword.text.toString()
 
-//            viewModel.userLogin(name, password)
+            viewModel.userLogin(name, password)
             //for bypass the login view
-            startActivity(Intent(this, MainActivity::class.java))
+//            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 

@@ -32,14 +32,14 @@ interface ApiService {
     fun getAllArtWork(): Call<List<AllArtworkResponseItem>>
 
 
-    @Multipart
-    @POST("upload/artworks")
-    suspend fun uploadImage(
-        @Part image: MultipartBody.Part,
-        @Part("user_id") user_id: RequestBody,
-        @Part("title") title: RequestBody,
-        @Part("description") description: RequestBody,
-        @Part("tags") tags: RequestBody,
-    ): PostUploadArtWorkResponse
+//    @Multipart
+//    @POST("upload/artworks")
+//    suspend fun uploadImage(
+//        @Part image: MultipartBody.Part,
+//        @Part("user_id") user_id: RequestBody,
+//        @Part("title") title: RequestBody,
+//        @Part("description") description: RequestBody,
+//        @Part("tags") tags: RequestBody,
+//    ): PostUploadArtWorkResponse
 
 }
