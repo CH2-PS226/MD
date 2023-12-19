@@ -18,6 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import capstone.catora.R
 import capstone.catora.data.remote.api.ApiConfig
+import capstone.catora.data.remote.api.ApiConfigUploadArt
 import capstone.catora.data.remote.api.response.PostUploadArtWorkResponse
 import capstone.catora.databinding.FragmentUploadBinding
 import capstone.catora.utils.uriToFile
@@ -73,7 +74,7 @@ class UploadFragment : Fragment() {
         binding.btnUpload.setOnClickListener {
             //Random.nextBoolean() just for giving dummy boolean, remove this when system has response from server
 //            uploadAction(Random.nextBoolean())
-            uploadImage()
+            uploadArtwork()
         }
 
         return root
@@ -85,13 +86,14 @@ class UploadFragment : Fragment() {
     }
 
 
-    private fun uploadAction(isHumanArt: Boolean) {
+    private fun uploadAction(isHumanArt: String) {
 
-        if (isHumanArt){
+        if (isHumanArt=="Artwork created by Human and uploaded successfully"){
             AlertDialog.Builder(requireContext()).apply {
                 setTitle("Success!")
                 setMessage("Your art likely human art")
                 setPositiveButton("Continue"){_,_ ->
+                    activity?.recreate()
                     findNavController().popBackStack()
                     findNavController().navigate(R.id.navigation_notifications)
                 }
@@ -137,7 +139,7 @@ class UploadFragment : Fragment() {
         }
     }
 
-    private fun uploadImage() {
+    private fun uploadArtwork() {
         showLoading(true)
         if (currentImageUri != null) {
 
@@ -152,7 +154,7 @@ class UploadFragment : Fragment() {
 //                    return
 //                }
 
-                val userId = "12"
+                val userId = "20"
                 val description = binding.edDescription.text.toString()
                 val tag = binding.edTag.text.toString()
                 val title = binding.edTitle.text.toString()
@@ -172,15 +174,10 @@ class UploadFragment : Fragment() {
                 lifecycleScope.launch {
                     try {
                         val successResponse:PostUploadArtWorkResponse
-                        val apiService = ApiConfig.getApiService()
-
+                        val apiService = ApiConfigUploadArt.getApiService()
 
                         successResponse = apiService.uploadImage(image = multipartBody, user_id = userIdBody, title = titleBody, tags = tagBody, description = descriptionBody)
-                        showToast(successResponse.message)
-//                        val intent = Intent(this@AddStoryActivity, MainActivity::class.java)
-//                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                        startActivity(intent)
-                        uploadAction(Random.nextBoolean())
+                        uploadAction(successResponse.message)
                         showLoading(false)
                     } catch (e: HttpException) {
                         val jsonInString = e.response()?.errorBody()?.string()
