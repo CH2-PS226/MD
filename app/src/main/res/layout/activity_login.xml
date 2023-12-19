@@ -51,6 +51,7 @@
             app:layout_constraintVertical_bias="0.1" />
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:id="@+id/textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
@@ -80,6 +81,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:id="@+id/textPasswordLayout"
             app:hintEnabled="false"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -94,15 +96,14 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
             app:startIconDrawable="@drawable/ic_password">
 
-
             <com.bimajatik.storyapp.view.customview.PasswordEditTextCustomView
                 android:id="@+id/ed_password"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:background="@color/white"
+                android:inputType="textPassword"
                 android:ems="10"
                 android:hint="@string/input_password"
-                android:inputType="textPassword"
                 android:lines="1"
                 android:maxLines="1"
                 android:singleLine="true"

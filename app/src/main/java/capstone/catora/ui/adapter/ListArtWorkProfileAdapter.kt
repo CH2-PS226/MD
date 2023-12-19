@@ -1,4 +1,4 @@
-package capstone.catora.adapter
+package capstone.catora.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

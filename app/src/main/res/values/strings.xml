@@ -22,6 +22,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="detail_request">Detail Order Commission</string>
+    <string name="title">Title</string>
+    <string name="request_description">Write your description here .......</string>
+    <string name="price">Price</string>
+    <string name="confirm">Confirm</string>
     <string name="send_order">Send Order</string>
     <string name="have_order">Have Order</string>
 </resources>
