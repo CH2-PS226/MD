@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import capstone.catora.R
 import capstone.catora.data.ArtWorkProfile
-import capstone.catora.adapter.ListArtWorkProfileAdapter
+import capstone.catora.ui.adapter.ListArtWorkProfileAdapter
 import capstone.catora.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {

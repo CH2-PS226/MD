@@ -1,4 +1,4 @@
-package capstone.catora.adapter
+package capstone.catora.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -32,7 +32,12 @@ class AllArtAdapter: ListAdapter<AllArtworkResponseItem, AllArtAdapter.MyViewHol
 
             itemView.setOnClickListener {
                 val moveWithData = Intent(itemView.context, DetailArtworkActivity::class.java)
-                moveWithData.putExtra("userid", allArtwork.artworkId)
+                moveWithData.putExtra("userid", allArtwork.userId)
+                moveWithData.putExtra("imageurl", allArtwork.imageUrl)
+                moveWithData.putExtra("description", allArtwork.description)
+                moveWithData.putExtra("title", allArtwork.title)
+                moveWithData.putExtra("tags", allArtwork.tags)
+                moveWithData.putExtra("createdat", allArtwork.createdAt)
                 itemView.context.startActivity(moveWithData)
             }
         }

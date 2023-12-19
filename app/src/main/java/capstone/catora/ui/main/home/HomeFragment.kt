@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import capstone.catora.R
-import capstone.catora.adapter.AllArtAdapter
+import capstone.catora.ui.adapter.AllArtAdapter
 import capstone.catora.data.ArtWorkProfile
 import capstone.catora.databinding.FragmentHomeBinding
-import capstone.catora.adapter.ListArtWorkProfileAdapter
+import capstone.catora.ui.adapter.ListArtWorkProfileAdapter
 import capstone.catora.data.remote.api.response.AllArtworkResponseItem
 
 class HomeFragment : Fragment() {
@@ -36,11 +36,6 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
 
 
         binding.rvArtwork.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
