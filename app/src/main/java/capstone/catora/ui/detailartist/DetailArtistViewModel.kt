@@ -1,4 +1,4 @@
-package capstone.catora.ui.detailartwork
+package capstone.catora.ui.detailartist
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -7,12 +7,11 @@ import androidx.lifecycle.ViewModel
 import capstone.catora.data.remote.api.ApiConfig
 import capstone.catora.data.remote.api.response.AllArtworkResponseItem
 import capstone.catora.data.remote.api.response.GetUserByIdResponse
-import capstone.catora.ui.main.home.HomeViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailArtworkViewModel: ViewModel() {
+class DetailArtistViewModel: ViewModel() {
     private val loading = MutableLiveData<Boolean>()
 
     private val _listArtwork = MutableLiveData<List<AllArtworkResponseItem>?>()
@@ -78,7 +77,7 @@ class DetailArtworkViewModel: ViewModel() {
     }
 
     companion object {
-        private const val TAG = "DetailArtworkActivity"
+        private const val TAG = "DetailArtistActivity"
         const val ID = "20"
     }
 }
