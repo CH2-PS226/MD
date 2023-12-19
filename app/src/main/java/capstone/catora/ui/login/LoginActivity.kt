@@ -53,7 +53,8 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.edPassword.text.toString()
 
             viewModel.userLogin(name, password)
-
+            //for bypass the login view
+//            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
