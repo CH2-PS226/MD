@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
             searchView
@@ -46,6 +47,7 @@ class HomeFragment : Fragment() {
                     false
                 }
         }
+
 
         binding.rvArtwork.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 

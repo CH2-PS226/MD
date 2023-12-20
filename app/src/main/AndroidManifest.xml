@@ -24,6 +24,9 @@
             android:name=".ui.ordercommission.OrderCommissionActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.orderprocess.OrderProcessActivity"
             android:exported="false" />
         <activity
@@ -34,9 +37,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.WelcomeActivity"
