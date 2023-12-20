@@ -15,6 +15,8 @@ class WelcomeActivity : AppCompatActivity() {
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         binding.btnWelcomeLogin.setOnClickListener{
             startActivity(Intent(this, LoginActivity::class.java))
         }
