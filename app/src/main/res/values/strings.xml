@@ -29,4 +29,6 @@
     <string name="confirm">Confirm</string>
     <string name="send_order">Send Order</string>
     <string name="have_order">Have Order</string>
+    <string name="artist_name">[Artist Name]</string>
+    <string name="description">[DESCRIPTION lorem ipsum dolor sit amet]</string>
 </resources>

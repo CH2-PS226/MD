@@ -77,7 +77,7 @@ class DetailArtworkActivity : AppCompatActivity() {
 
         }
 
-        binding.rvArtwork.setHasFixedSize(true)
+//        binding.rvArtwork.setHasFixedSize(true)
         binding.rvArtwork.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         viewModel.listArtwork.observe(this) {

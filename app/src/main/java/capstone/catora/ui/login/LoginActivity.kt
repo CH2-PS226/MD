@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide() //this line for remove action bar
 
-
         setupAction()
 
         viewModel.errorLiveData.observe(this){ errorMessage ->

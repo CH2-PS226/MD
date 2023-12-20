@@ -8,5 +8,11 @@ class OrderCommissionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_commission)
+
+        val userid = intent.getStringExtra(USERID)
+    }
+
+    companion object {
+        private const val USERID = "userid"
     }
 }

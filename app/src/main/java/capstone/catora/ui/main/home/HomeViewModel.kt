@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import capstone.catora.data.remote.api.ApiConfig
 import capstone.catora.data.remote.api.response.AllArtworkResponse
 import capstone.catora.data.remote.api.response.AllArtworkResponseItem
+import capstone.catora.ui.main.profile.ProfileViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,7 +31,7 @@ class HomeViewModel : ViewModel() {
         allArtwork()
     }
 
-    private fun allArtwork() {
+    fun allArtwork() {
         showLoading(true)
         val user = ApiConfig.getApiService().getAllArtWork()
 
@@ -47,6 +48,31 @@ class HomeViewModel : ViewModel() {
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}" )
+                }
+            }
+
+            override fun onFailure(call: Call<List<AllArtworkResponseItem>>, t: Throwable) {
+                showLoading(false)
+                Log.e(TAG, "onFailure : ${t.message}")
+            }
+        })
+    }
+
+    fun getArtworkById(title: String) {
+        showLoading(true)
+        val artworkId = ApiConfig.getApiService().searchArtwork(title)
+
+        artworkId.enqueue(object : Callback<List<AllArtworkResponseItem>> {
+            override fun onResponse(
+                call: Call<List<AllArtworkResponseItem>>,
+                response: Response<List<AllArtworkResponseItem>>
+            ) {
+                showLoading(false)
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        _listArtwork.value = response.body()
+                    }
                 }
             }
 
