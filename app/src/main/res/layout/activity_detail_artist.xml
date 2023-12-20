@@ -29,7 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:text="[Artist Name]"
+            android:text="@string/artist_name"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/artist_photo"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="@+id/artist_photo"
@@ -40,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="[DESCRIPTION lorem ipsum dolor sit amet]"
+            android:text="@string/description"
             app:layout_constraintEnd_toEndOf="@+id/artist_name"
             app:layout_constraintStart_toStartOf="@+id/artist_name"
             app:layout_constraintTop_toBottomOf="@+id/artist_name" />
@@ -49,7 +50,7 @@
             android:id="@+id/order_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginTop="28dp"
             android:backgroundTint="#0BAAE6"
             android:text="Order Commission"
@@ -70,7 +71,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/order_btn"
             app:layout_constraintVertical_bias="0.0" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

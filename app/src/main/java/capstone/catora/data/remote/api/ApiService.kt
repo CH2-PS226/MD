@@ -15,8 +15,10 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 
 interface ApiService {
@@ -27,7 +29,6 @@ interface ApiService {
     @POST("auth/login")
     suspend fun postLogin(@Body requestBody: Map<String, String>):PostLoginResponse
 
-
     @GET("upload/artworks")
     fun getAllArtWork(): Call<List<AllArtworkResponseItem>>
 
@@ -35,6 +36,24 @@ interface ApiService {
     fun getUserById(
         @Path("id") id: String,
     ): Call<GetUserByIdResponse>
+    @GET("upload/artworks/{id}")
+    fun getArtworkById(
+        @Path("id") id: String,
+    ): Call<List<AllArtworkResponseItem>>
+    @GET("upload/search")
+    fun searchArtwork(
+        @Query("title") title: String,
+//        @Query("description") description: String,
+//        @Query("tags") tags: String,
+    ): Call<List<AllArtworkResponseItem>>
+    @Multipart
+    @PUT("profile/profile/{id}")
+    suspend fun editProfile(
+        @Path("id") id: String,
+        @Part image: MultipartBody.Part,
+        @Part("artist_name") artistName: RequestBody,
+        @Part("description") description: RequestBody
+    ): PostUploadArtWorkResponse
 
 //    @Multipart
 //    @POST("upload/artworks")
