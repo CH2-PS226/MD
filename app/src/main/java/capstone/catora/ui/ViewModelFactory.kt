@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import capstone.catora.data.CatoraRepository
 import capstone.catora.di.Injection
 import capstone.catora.ui.login.LoginViewModel
+import capstone.catora.ui.main.profile.ProfileViewModel
 import capstone.catora.ui.register.RegisterViewModel
 
 class ViewModelFactory(private val repository: CatoraRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -23,6 +24,9 @@ class ViewModelFactory(private val repository: CatoraRepository) : ViewModelProv
             }
             modelClass.isAssignableFrom(WelcomeViewModel::class.java) -> {
                 WelcomeViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

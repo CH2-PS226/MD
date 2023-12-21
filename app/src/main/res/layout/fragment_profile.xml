@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
         <ImageView
@@ -49,14 +49,26 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:backgroundTint="#0BAAE6"
-            android:text="Edit Profile"
-            android:textSize="10sp"
+            android:text="@string/edit_profile"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_profile_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.658"
+            app:layout_constraintHorizontal_bias="0.87"
             app:layout_constraintStart_toEndOf="@+id/iv_profile_image"
             app:layout_constraintTop_toTopOf="@+id/iv_profile_image"
-            app:layout_constraintVertical_bias="0.519" />
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#0BAAE6"
+            android:text="@string/logout"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_edit_profile"
+            app:layout_constraintStart_toStartOf="@+id/btn_edit_profile"
+            app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile" />
 
         <Button
             android:id="@+id/btn_my_order"
@@ -66,7 +78,7 @@
             android:layout_marginHorizontal="30dp"
             android:backgroundTint="#0BAAE6"
             android:gravity="center"
-            android:text="My Order"
+            android:text="@string/my_order"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"

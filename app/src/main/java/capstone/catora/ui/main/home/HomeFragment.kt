@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import capstone.catora.ui.adapter.AllArtAdapter
 import capstone.catora.databinding.FragmentHomeBinding
@@ -15,6 +17,7 @@ import capstone.catora.data.remote.api.response.AllArtworkResponseItem
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private lateinit var homeViewModel: HomeViewModel
 
 //    private val list = ArrayList<ArtWorkProfile>()
 
@@ -26,7 +29,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): ConstraintLayout? {
+    ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         return binding?.root
@@ -35,7 +38,19 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+            homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
+            homeViewModel.allArtwork()
+
+            binding?.rvArtwork?.setHasFixedSize(true)
+            binding?.rvArtwork?.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+            homeViewModel.listArtwork.observe(requireActivity()) {
+                if (it != null ) {
+                    setAllArtwork(it)
+                }
+
+            }
 
             with(binding) {
                 this?.searchView?.setupWithSearchBar(this?.searchBar)
@@ -51,15 +66,6 @@ class HomeFragment : Fragment() {
                         homeViewModel.getArtworkById( search )
                         false
                     }
-            }
-
-            binding?.rvArtwork?.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
-            homeViewModel.listArtwork.observe(viewLifecycleOwner) {
-                if (it != null ){
-                    setAllArtwork(it)
-                }
-
             }
         }
     }

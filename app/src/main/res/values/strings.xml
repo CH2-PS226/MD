@@ -32,4 +32,7 @@
     <string name="artist_name">[Artist Name]</string>
     <string name="description">[DESCRIPTION lorem ipsum dolor sit amet]</string>
     <string name="postat">Posted at %1$s</string>
+    <string name="logout">Logout</string>
+    <string name="my_order">My Order</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>

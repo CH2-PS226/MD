@@ -46,7 +46,7 @@ class UploadFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): ConstraintLayout? {
+    ): View? {
 
         _binding = FragmentUploadBinding.inflate(inflater, container, false)
 
@@ -193,8 +193,9 @@ class UploadFragment : Fragment() {
                     } catch (e: HttpException) {
                         val jsonInString = e.response()?.errorBody()?.string()
                         errorMessage = jsonInString
-                        showToast(errorMessage.toString())
-                        Log.d(TAG, errorMessage.toString())
+//                        showToast(errorMessage.toString())
+//                        Log.d(TAG, errorMessage.toString())
+                        errorMessage?.let { uploadAction(it) }
                         showLoading(false)
                     } finally {
                         showLoading(false)
