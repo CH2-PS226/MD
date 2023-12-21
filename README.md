@@ -36,9 +36,9 @@
 ### 9. Detail User
   This page displays the artist's profile photo, name and description. There is an order commission button to place orders to artists. At the bottom there are various other works of art.
 ### 10. My Order
-  This page has 2 tabs, namely Send Order and Have Order.
-The Send Order page displays various orders that have been approved by the artist. There are 3 conditions for the order and they are represented by color, namely "Send" (blue), "Process" (yellow), and "Done" (green).
-  The Have Order page displays a list of new orders. Artists can either "Accept" or "Decline" the Order.
+- This page has 2 tabs, namely Send Order and Have Order.
+- The Send Order page displays various orders that have been approved by the artist. There are 3 conditions for the order and they are represented by color, namely "Send" (blue), "Process" (yellow), and "Done" (green).
+- The Have Order page displays a list of new orders. Artists can either "Accept" or "Decline" the Order.
 ### 11. Order Commission
   This page functions to submit orders to artists. Users will enter the Title, Price, and Description of the desired artwork.
 
