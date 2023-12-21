@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/iv_profile_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="55dp"
             android:src="@drawable/dummy_artwork_4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,10 +53,10 @@
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_profile_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.681"
+            app:layout_constraintHorizontal_bias="0.658"
             app:layout_constraintStart_toEndOf="@+id/iv_profile_image"
             app:layout_constraintTop_toTopOf="@+id/iv_profile_image"
-            app:layout_constraintVertical_bias="0.574" />
+            app:layout_constraintVertical_bias="0.519" />
 
         <Button
             android:id="@+id/btn_my_order"
@@ -77,6 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:paddingBottom="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

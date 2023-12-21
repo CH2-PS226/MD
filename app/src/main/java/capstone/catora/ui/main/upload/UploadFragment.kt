@@ -16,11 +16,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import capstone.catora.R
+import capstone.catora.data.pref.UserPreferences
+import capstone.catora.data.pref.dataStore
 import capstone.catora.data.remote.api.ApiConfigUploadArt
 import capstone.catora.data.remote.api.response.PostUploadArtWorkResponse
 import capstone.catora.databinding.FragmentUploadBinding
 import capstone.catora.utils.uriToFile
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -52,12 +56,12 @@ class UploadFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val uploadViewModel = ViewModelProvider(this)[UploadViewModel::class.java]
+//            val uploadViewModel = ViewModelProvider(this)[UploadViewModel::class.java]
 
-            //        val textView: TextView = binding.textDashboard
-//        dashboardViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
+//            val textView: TextView = binding.textDashboard
+//            dashboardViewModel.text.observe(viewLifecycleOwner) {
+//                textView.text = it
+//            }
 
 
 //        var actionBar = supportActionBar
@@ -65,6 +69,13 @@ class UploadFragment : Fragment() {
 //        if (actionBar != null){
 //            actionBar.setDisplayHomeAsUpEnabled(true)
 //        }
+
+            val pref = UserPreferences.getInstance(requireActivity().dataStore)
+            val user = runBlocking { pref.getSession().first() }
+
+            val userId = user.userId
+
+            Log.d("userid", userId)
 
             binding?.llChooseImage?.setOnClickListener {
                 startGalerry()
@@ -75,7 +86,7 @@ class UploadFragment : Fragment() {
             binding?.btnUpload?.setOnClickListener {
                 //Random.nextBoolean() just for giving dummy boolean, remove this when system has response from server
         //            uploadAction(Random.nextBoolean())
-                uploadArtwork()
+                uploadArtwork(userId)
             }
 
         }
@@ -96,7 +107,7 @@ class UploadFragment : Fragment() {
                 setPositiveButton("Continue"){_,_ ->
                     activity?.recreate()
                     findNavController().popBackStack()
-                    findNavController().navigate(R.id.navigation_notifications)
+                    findNavController().navigate(R.id.navigation_home)
                 }
                 create()
                 show()
@@ -140,7 +151,7 @@ class UploadFragment : Fragment() {
         }
     }
 
-    private fun uploadArtwork() {
+    private fun uploadArtwork(userId: String) {
         showLoading(true)
         if (currentImageUri != null) {
 
@@ -155,7 +166,6 @@ class UploadFragment : Fragment() {
 //                    return
 //                }
 
-                val userId = "20"
                 val description = binding?.edDescription?.text.toString()
                 val tag = binding?.edTag?.text.toString()
                 val title = binding?.edTitle?.text.toString()

@@ -15,10 +15,11 @@ import capstone.catora.R
 import capstone.catora.data.remote.api.ApiConfig
 import capstone.catora.data.remote.api.response.PostUploadArtWorkResponse
 import capstone.catora.databinding.ActivityEditProfileBinding
+import capstone.catora.ui.main.MainActivity
 import capstone.catora.ui.main.profile.ProfileFragment
 import capstone.catora.ui.main.upload.UploadFragment
-import capstone.catora.ui.utils.reduceFileImage
-import capstone.catora.ui.utils.uriToFile
+import capstone.catora.utils.reduceFileImage
+import capstone.catora.utils.uriToFile
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -88,7 +89,7 @@ class EditProfileActivity : AppCompatActivity() {
                 success
             )
             setPositiveButton("continue") { _, _ ->
-                val intent = Intent(this@EditProfileActivity, ProfileFragment::class.java)
+                val intent = Intent(this@EditProfileActivity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finish()

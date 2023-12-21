@@ -153,7 +153,10 @@
                 android:layout_marginTop="50dp"
                 android:drawableEnd="@drawable/upload"
                 android:gravity="center"
-                android:text="Upload" />
+                android:text="Upload"
+                android:backgroundTint="#0BAAE6"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="20sp"/>
 
         </LinearLayout>
 
