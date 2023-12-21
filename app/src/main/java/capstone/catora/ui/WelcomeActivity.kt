@@ -23,12 +23,16 @@ class WelcomeActivity : AppCompatActivity() {
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         viewModel.getSession().observe(this) { user ->
             if (user.isLogin) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }
+
+        supportActionBar?.hide()
+
 
         binding.btnWelcomeLogin.setOnClickListener{
             startActivity(Intent(this, LoginActivity::class.java))
