@@ -1,6 +1,5 @@
 package capstone.catora.ui.main.upload
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,25 +10,22 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import capstone.catora.R
-import capstone.catora.data.remote.api.ApiConfig
 import capstone.catora.data.remote.api.ApiConfigUploadArt
 import capstone.catora.data.remote.api.response.PostUploadArtWorkResponse
 import capstone.catora.databinding.FragmentUploadBinding
 import capstone.catora.utils.uriToFile
-import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.HttpException
-import kotlin.random.Random
 
 class UploadFragment : Fragment() {
 
@@ -40,20 +36,25 @@ class UploadFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val uploadViewModel =
-            ViewModelProvider(this).get(UploadViewModel::class.java)
+    ): ConstraintLayout? {
 
         _binding = FragmentUploadBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-//        val textView: TextView = binding.textDashboard
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (activity != null) {
+            val uploadViewModel = ViewModelProvider(this)[UploadViewModel::class.java]
+
+            //        val textView: TextView = binding.textDashboard
 //        dashboardViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
@@ -65,19 +66,19 @@ class UploadFragment : Fragment() {
 //            actionBar.setDisplayHomeAsUpEnabled(true)
 //        }
 
-        binding.llChooseImage.setOnClickListener {
-            startGalerry()
-        }
-        binding.tvChooseOtherImage.setOnClickListener {
-            startGalerry()
-        }
-        binding.btnUpload.setOnClickListener {
-            //Random.nextBoolean() just for giving dummy boolean, remove this when system has response from server
-//            uploadAction(Random.nextBoolean())
-            uploadArtwork()
-        }
+            binding?.llChooseImage?.setOnClickListener {
+                startGalerry()
+            }
+            binding?.tvChooseOtherImage?.setOnClickListener {
+                startGalerry()
+            }
+            binding?.btnUpload?.setOnClickListener {
+                //Random.nextBoolean() just for giving dummy boolean, remove this when system has response from server
+        //            uploadAction(Random.nextBoolean())
+                uploadArtwork()
+            }
 
-        return root
+        }
     }
 
     override fun onDestroyView() {
@@ -132,10 +133,10 @@ class UploadFragment : Fragment() {
     private fun showImage() {
         currentImageUri?.let {
             Log.d("Image Uri", "showImage: $it")
-            binding.ivArtWork.setImageURI(it)
-            binding.ivArtWork.visibility = View.VISIBLE
-            binding.llChooseImage.visibility = View.GONE
-            binding.tvChooseOtherImage.visibility = View.VISIBLE
+            binding?.ivArtWork?.setImageURI(it)
+            binding?.ivArtWork?.visibility = View.VISIBLE
+            binding?.llChooseImage?.visibility = View.GONE
+            binding?.tvChooseOtherImage?.visibility = View.VISIBLE
         }
     }
 
@@ -155,9 +156,9 @@ class UploadFragment : Fragment() {
 //                }
 
                 val userId = "20"
-                val description = binding.edDescription.text.toString()
-                val tag = binding.edTag.text.toString()
-                val title = binding.edTitle.text.toString()
+                val description = binding?.edDescription?.text.toString()
+                val tag = binding?.edTag?.text.toString()
+                val title = binding?.edTitle?.text.toString()
 
                 val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
                 val descriptionBody = description.toRequestBody("text/plain".toMediaType())
@@ -198,7 +199,7 @@ class UploadFragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding?.progressBar?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun showToast(message: String) {

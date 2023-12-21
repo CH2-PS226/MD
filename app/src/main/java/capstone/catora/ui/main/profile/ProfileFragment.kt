@@ -28,66 +28,76 @@ class ProfileFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val profileViewModel =
-            ViewModelProvider(this)[ProfileViewModel::class.java]
+    ): View? {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val pref = UserPreferences.getInstance(requireActivity().dataStore)
-        val user = runBlocking { pref.getSession().first() }
+        return binding?.root
+    }
 
-        val userId = user.userId
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        Log.d("userid", userId)
+        if (activity != null) {
+            val profileViewModel =
+                ViewModelProvider(this)[ProfileViewModel::class.java]
 
-        profileViewModel.getUserByID(userId)
-        profileViewModel.userId.observe(requireActivity()) {
-            if (it != null) {
-                binding.tvUsername.text = it.artistName
-                binding.tvProfileDescription.text = it.description
+            val pref = UserPreferences.getInstance(requireActivity().dataStore)
+            val user = runBlocking { pref.getSession().first() }
 
-                Glide.with(requireActivity())
-                    .load(it.profileImageUrl)
-                    .circleCrop()
-                    .into(binding.ivProfileImage)
+            val userId = user.userId
+
+            Log.d("userid", userId)
+
+            profileViewModel.getUserByID(userId)
+            profileViewModel.userId.observe(requireActivity()) {
+                if (it != null) {
+                    binding?.tvUsername?.text = it.artistName
+                    binding?.tvProfileDescription?.text = it.description
+
+                    binding?.let { it1 ->
+                        Glide.with(requireActivity())
+                            .load(it.profileImageUrl)
+                            .circleCrop()
+                            .into(it1.ivProfileImage)
+                    }
+                }
             }
-        }
 
-        profileViewModel.getArtworkById(userId)
-        profileViewModel.listArtwork.observe(requireActivity()) {
-            if (it != null ) {
-                setAllArtwork(it)
+            profileViewModel.getArtworkById(userId)
+            profileViewModel.listArtwork.observe(requireActivity()) {
+                if (it != null ) {
+                    setAllArtwork(it)
+                }
             }
-        }
 
 //        binding.rvArtworkProfile.setHasFixedSize(true)
-        binding.rvArtworkProfile.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            binding?.rvArtworkProfile?.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-        binding.btnMyOrder.setOnClickListener {
-            startActivity(Intent(requireContext(), OrderProcessActivity::class.java))
+            binding?.btnMyOrder?.setOnClickListener {
+                startActivity(Intent(requireContext(), OrderProcessActivity::class.java))
+            }
+
+            binding?.btnEditProfile?.setOnClickListener {
+                val moveData = Intent(requireActivity(), EditProfileActivity::class.java)
+                moveData.putExtra("userid", userId)
+                requireActivity().startActivity(moveData)
+            }
         }
 
-        binding.btnEditProfile.setOnClickListener {
-            val moveData = Intent(requireActivity(), EditProfileActivity::class.java)
-            moveData.putExtra("userid", userId)
-            requireActivity().startActivity(moveData)
-        }
 
-        return root
     }
 
     private fun setAllArtwork(artwork: List<AllArtworkResponseItem>?) {
         val adapter = AllArtAdapter()
         adapter.submitList(artwork)
-        binding.rvArtworkProfile.adapter = adapter
+        binding?.rvArtworkProfile?.adapter = adapter
     }
 
     override fun onDestroyView() {
