@@ -3,22 +3,14 @@ package capstone.catora.ui.detailartwork
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import capstone.catora.R
 import capstone.catora.ui.adapter.AllArtAdapter
-import capstone.catora.data.ArtWorkProfile
 import capstone.catora.databinding.ActivityDetailArtworkBinding
-import capstone.catora.ui.adapter.ListArtWorkProfileAdapter
 import capstone.catora.data.remote.api.response.AllArtworkResponseItem
-import capstone.catora.databinding.FragmentHomeBinding
-import capstone.catora.ui.ViewModelFactory
 import capstone.catora.ui.detailartist.DetailArtist
-import capstone.catora.ui.login.LoginViewModel
-import capstone.catora.ui.main.home.HomeViewModel
 import com.bumptech.glide.Glide
 
 class DetailArtworkActivity : AppCompatActivity() {
@@ -50,7 +42,7 @@ class DetailArtworkActivity : AppCompatActivity() {
         binding.tags.text = tags
         binding.title.text = title
         binding.artworkDescription.text = description
-        binding.createdat.text = createdat
+        binding.createdat.text = getString(R.string.postat, createdat)
 
         Glide.with(this)
             .load(imageurl)

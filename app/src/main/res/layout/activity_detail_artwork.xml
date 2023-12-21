@@ -51,7 +51,7 @@
             android:id="@+id/artist_photo"
             android:layout_width="98dp"
             android:layout_height="108dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.056"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,13 +63,12 @@
             android:id="@+id/other_art"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:text="Other Art"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.107"
+            app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/artist_photo" />
-
 
         <TextView
             android:id="@+id/title"
@@ -93,8 +92,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/other_art"
-            tools:listitem="@layout/item_artwork_profile" />
+            app:layout_constraintTop_toBottomOf="@+id/other_art" />
 
         <TextView
             android:id="@+id/tags"
@@ -113,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Postest at xx-xx-xxxx"
+            android:text="@string/postat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/artwork_description"
