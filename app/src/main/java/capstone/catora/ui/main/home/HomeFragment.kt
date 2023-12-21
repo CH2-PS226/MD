@@ -17,7 +17,6 @@ import capstone.catora.data.remote.api.response.AllArtworkResponseItem
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private lateinit var homeViewModel: HomeViewModel
 
 //    private val list = ArrayList<ArtWorkProfile>()
 
@@ -38,12 +37,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+            val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
-            homeViewModel.allArtwork()
 
-            binding?.rvArtwork?.setHasFixedSize(true)
-            binding?.rvArtwork?.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
             homeViewModel.listArtwork.observe(requireActivity()) {
                 if (it != null ) {
@@ -56,7 +52,7 @@ class HomeFragment : Fragment() {
                 this?.searchView?.setupWithSearchBar(this?.searchBar)
                 this?.searchView
                     ?.editText
-                    ?.setOnEditorActionListener { textView, actionId, event ->
+                    ?.setOnEditorActionListener { _, _, _ ->
                         searchBar.text = searchView.text
                         searchView.hide()
                         val search = searchView.text.toString()
@@ -67,6 +63,9 @@ class HomeFragment : Fragment() {
                         false
                     }
             }
+
+            binding?.rvArtwork?.setHasFixedSize(true)
+            binding?.rvArtwork?.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
     }
 
